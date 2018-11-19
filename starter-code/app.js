@@ -12,6 +12,7 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const flash = require("connect-flash");
 //Require user model
 const User = require("./models/User.js")
 
@@ -81,6 +82,7 @@ passport.deserializeUser((id, cb) => {
   });
 });
 
+app.use(flash());
 passport.use(new LocalStrategy((username, password, next) => {
   User.findOne({
     username
